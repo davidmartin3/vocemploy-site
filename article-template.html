@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ✏️ EDIT: Update title with your article name -->
+  <title>Article Title — Vocemploy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #1e3a5f; --navy-mid: #274d7a; --navy-light: #3464b0;
+      --gold: #c9a84c; --gold-light: #e8c97a;
+      --cream: #ffffff; --white: #ffffff; --text-dim: #ccdff5;
+      --border: rgba(201,168,76,0.32);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy); color: var(--cream); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0; opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(11,21,37,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0.04em; }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .nav-cta { background: transparent; border: 1px solid var(--gold); color: var(--gold) !important; padding: 0.5rem 1.3rem; border-radius: 2px; transition: background 0.2s, color 0.2s !important; }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--navy) !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--cream); transition: all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: rgba(11,21,37,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 99; flex-direction: column; gap: 1.2rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: var(--cream); text-decoration: none; font-size: 1.1rem; padding: 0.4rem 0; border-bottom: 1px solid var(--border); }
+    .mobile-menu a:last-child { border-bottom: none; }
+
+    /* ── ARTICLE LAYOUT ── */
+    .article-wrapper {
+      max-width: 760px; margin: 0 auto;
+      padding: 8rem 2rem 6rem;
+      position: relative; z-index: 1;
+    }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--gold); text-decoration: none;
+      font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 2.5rem; transition: gap 0.2s;
+    }
+    .back-link:hover { gap: 0.7rem; }
+    .back-link::before { content: '←'; }
+
+    .article-category {
+      font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem;
+    }
+
+    .article-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600; line-height: 1.15;
+      margin-bottom: 1.2rem;
+    }
+
+    .article-meta {
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+      font-size: 0.8rem; color: rgba(204,223,245,0.55);
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── ARTICLE BODY ── */
+    .article-body { font-size: 1rem; line-height: 1.85; color: rgba(255,255,255,0.88); }
+
+    .article-body p { margin-bottom: 1.5rem; }
+
+    .article-body h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem; font-weight: 600;
+      color: var(--white); margin: 2.5rem 0 1rem;
+      padding-top: 1rem; border-top: 1px solid var(--border);
+    }
+
+    .article-body h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 600;
+      color: var(--white); margin: 2rem 0 0.8rem;
+    }
+
+    .article-body ul, .article-body ol {
+      margin: 0 0 1.5rem 1.5rem;
+    }
+    .article-body li { margin-bottom: 0.5rem; }
+
+    .article-body blockquote {
+      border-left: 3px solid var(--gold);
+      padding: 1rem 1.5rem;
+      margin: 2rem 0;
+      background: rgba(201,168,76,0.06);
+      font-style: italic; color: var(--text-dim);
+      font-size: 1.05rem;
+    }
+
+    .article-body .callout {
+      border: 1px solid var(--border);
+      background: rgba(39,77,122,0.2);
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .article-body .callout strong { color: var(--gold); display: block; margin-bottom: 0.4rem; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* ── CTA BOX ── */
+    .article-cta {
+      margin-top: 3rem; padding: 2.5rem;
+      border: 1px solid var(--gold);
+      background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(39,77,122,0.2));
+      text-align: center;
+    }
+    .article-cta h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; margin-bottom: 0.7rem; }
+    .article-cta p { color: var(--text-dim); margin-bottom: 1.5rem; font-size: 0.95rem; }
+    .article-cta a {
+      display: inline-block;
+      background: var(--gold); color: var(--navy);
+      text-decoration: none; padding: 0.75rem 2rem;
+      font-size: 0.85rem; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .article-cta a:hover { background: var(--gold-light); }
+
+    /* ── RELATED ARTICLES ── */
+    .related-section { max-width: 760px; margin: 0 auto; padding: 0 2rem 6rem; }
+    .related-section h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 600;
+      margin-bottom: 1.5rem; padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .related-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    .related-card { border: 1px solid var(--border); padding: 1.3rem; transition: border-color 0.2s; }
+    .related-card:hover { border-color: var(--gold); }
+    .related-card .category { font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+    .related-card h5 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; line-height: 1.3; margin-bottom: 0.6rem; }
+    .related-card a { color: var(--gold); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 2.5rem 4rem; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--white); text-decoration: none; }
+    .footer-logo span { color: var(--gold); }
+    .footer-links { display: flex; gap: 1.8rem; flex-wrap: wrap; }
+    .footer-links a { color: var(--text-dim); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy { width: 100%; text-align: center; color: rgba(204,223,245,0.4); font-size: 0.78rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .article-wrapper, .related-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .related-grid { grid-template-columns: 1fr; }
+      footer { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Voc<span>employ</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#testimonials">Veterans</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    <li><a href="attorney.html">Attorneys</a></li>
+    <li><a href="articles.html" class="active">Articles</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Free Consultation</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#services" onclick="closeMobile()">Services</a>
+  <a href="index.html#about" onclick="closeMobile()">About</a>
+  <a href="resources.html" onclick="closeMobile()">Resources</a>
+  <a href="attorney.html" onclick="closeMobile()">Attorneys</a>
+  <a href="articles.html" onclick="closeMobile()">Articles</a>
+  <a href="index.html#contact" onclick="closeMobile()">Free Consultation</a>
+</div>
+
+<!-- ARTICLE -->
+<div class="article-wrapper">
+  <a href="articles.html" class="back-link">Back to Articles</a>
+
+  <!-- ✏️ EDIT: Change category -->
+  <p class="article-category">TDIU</p>
+
+  <!-- ✏️ EDIT: Change title -->
+  <h1 class="article-title">What Veterans Need to Know About Total Disability Individual Unemployability in 2025</h1>
+
+  <!-- ✏️ EDIT: Change date, author, read time -->
+  <div class="article-meta">
+    <span>June 12, 2025</span>
+    <span>By Vocemploy Staff</span>
+    <span>8 min read</span>
+  </div>
+
+  <!-- ✏️ EDIT: This is where your article content goes -->
+  <div class="article-body">
+
+    <p>Total Disability Individual Unemployability — commonly called TDIU — is one of the most important and least understood VA benefits available to veterans. It can provide 100% disability compensation even when a veteran's combined rating falls below the 100% threshold. Yet thousands of eligible veterans never apply, simply because they don't know it exists.</p>
+
+    <h2>What Is TDIU?</h2>
+
+    <p>TDIU is a VA benefit that allows veterans to receive compensation at the 100% rate if their service-connected disabilities prevent them from maintaining substantially gainful employment. The key word here is <em>substantially</em> — meaning regular, competitive employment that earns above the federal poverty threshold.</p>
+
+    <blockquote>
+      "A veteran doesn't need a 100% combined rating to receive 100% compensation. TDIU bridges that gap when disabilities make meaningful employment impossible."
+    </blockquote>
+
+    <h2>Who Qualifies?</h2>
+
+    <p>There are two main paths to TDIU eligibility:</p>
+
+    <ul>
+      <li><strong>Schedular TDIU:</strong> You have one service-connected disability rated at 60% or higher, OR two or more disabilities with a combined rating of 70% or more (with at least one rated at 40%).</li>
+      <li><strong>Extraschedular TDIU:</strong> You don't meet the rating thresholds above, but your disabilities still prevent gainful employment. This requires more documentation but is absolutely available.</li>
+    </ul>
+
+    <div class="callout">
+      <strong>Important Note</strong>
+      Marginal employment — working in a protected environment like a family business, or earning below the poverty threshold — does not disqualify you from TDIU. Always consult with a VA-accredited attorney before assuming you don't qualify.
+    </div>
+
+    <h2>How a Vocational Evaluation Strengthens Your Claim</h2>
+
+    <p>A professional vocational evaluation is one of the most powerful pieces of evidence you can submit with a TDIU claim. It provides an objective, expert assessment of how your service-connected disabilities affect your ability to perform the demands of competitive employment.</p>
+
+    <p>At Vocemploy, our evaluations document:</p>
+
+    <ul>
+      <li>Your residual functional capacity (physical and cognitive limitations)</li>
+      <li>Your occupational history and transferable skills</li>
+      <li>The labor market availability of jobs you could realistically perform</li>
+      <li>A professional opinion on your employability — or lack thereof</li>
+    </ul>
+
+    <h2>Next Steps</h2>
+
+    <p>If you believe your service-connected disabilities prevent you from working, the first step is to request a free consultation with our team. We'll review your ratings, your work history, and help you determine whether a vocational evaluation could support your claim.</p>
+
+    <p>Don't leave benefits on the table. Veterans who pursue TDIU with proper vocational documentation are approved at significantly higher rates.</p>
+
+  </div>
+  <!-- END ARTICLE BODY -->
+
+  <!-- CTA -->
+  <div class="article-cta">
+    <h3>Ready to Strengthen Your TDIU Claim?</h3>
+    <p>Request a free consultation to learn whether a vocational evaluation can support your case.</p>
+    <a href="index.html#contact">Get a Free Consultation</a>
+  </div>
+</div>
+
+<!-- RELATED ARTICLES -->
+<section class="related-section">
+  <h4>Related Articles</h4>
+  <div class="related-grid">
+    <!-- ✏️ EDIT: Update these with real related article links -->
+    <div class="related-card">
+      <p class="category">Vocational</p>
+      <h5>What Is a Vocational Expert and Why Does the VA Use One?</h5>
+      <a href="#">Read Article →</a>
+    </div>
+    <div class="related-card">
+      <p class="category">VA Claims</p>
+      <h5>Common Reasons VA Denies TDIU Claims — and How to Respond</h5>
+      <a href="#">Read Article →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">Voc<span>employ</span></a>
+    <div class="footer-links">
+      <a href="index.html#services">Services</a>
+      <a href="index.html#about">About</a>
+      <a href="resources.html">Resources</a>
+      <a href="attorney.html">Attorneys</a>
+      <a href="articles.html">Articles</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <div class="footer-copy">
+      © 2025 Vocemploy — 2607 Woodruff Ste E-354, Simpsonville, SC 29681 — <a href="tel:+18885886975" style="color:rgba(204,223,245,0.4);text-decoration:none">(888) 588-6975</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
+  function closeMobile() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); }
+</script>
+</body>
+</html>
